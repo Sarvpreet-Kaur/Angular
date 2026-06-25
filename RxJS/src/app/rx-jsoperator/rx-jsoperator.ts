@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { filter, from, interval, map, of, take } from 'rxjs';
 import { RxjsService } from '../service/rxjs-service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-rx-jsoperator',
@@ -56,5 +57,13 @@ export class RxJSOperator {
     this.rxService.getSingleUser(3).subscribe((res: any)=>{
       console.log(res)
     })
+  }
+
+  userSrv = inject(UserService)
+
+
+  onRoleChange(events: any){
+    this.userSrv.$roleBeh.next(events.target.value)
+    this.userSrv.$roleSub.next(events.target.value)
   }
 }
