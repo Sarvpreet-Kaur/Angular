@@ -1,0 +1,94 @@
+<div class="layout">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <div class="nav-left">
+
+            <button class="menu-btn" (click)="toggleSidebar()">
+                ☰
+            </button>
+
+            <h2>EMS Portal</h2>
+
+        </div>
+
+        <div class="nav-right">
+
+            <button class="notification-btn">
+                Notifications
+            </button>
+
+            <div class="profile">
+
+                <img src="https://i.pravatar.cc/150?img=2" alt="Profile">
+
+                <div class="user-details">
+                    <h4>John Doe</h4>
+                    <p>Administrator</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- Main Layout -->
+
+    <div class="main-container" [class.sidebar-collapsed]="!isSidebarOpen">
+
+        <!-- Sidebar -->
+
+        <aside class="sidebar" [class.close]="!isSidebarOpen">
+
+            <div class="sidebar-header">
+                <h3>Employee Management</h3>
+                <p>Administration Panel</p>
+            </div>
+
+            <ul class="menu">
+
+                <li routerLinkActive="active">
+                    <a routerLink="/dashboard">Dashboard</a>
+                </li>
+
+                <li routerLinkActive="active">
+                    <a routerLink="/employee">Employee</a>
+                </li>
+
+                <li routerLinkActive="active">
+                    <a routerLink="/project">Project</a>
+                </li>
+
+                <li routerLinkActive="active">
+                    <a routerLink="/projectEmployee">Project - Employee</a>
+                </li>
+
+                <li routerLink="/settings" routerLinkActive="active">
+                    <span>Settings</span>
+                </li>
+
+            </ul>
+
+            <div class="logout-section">
+
+                <button class="logout-btn" (click)="logoff()">
+                    Logout
+                </button>
+
+            </div>
+
+        </aside>
+
+        <!-- Routed Page -->
+
+        <main class="content">
+
+            <router-outlet></router-outlet>
+
+        </main>
+
+    </div>
+
+</div>

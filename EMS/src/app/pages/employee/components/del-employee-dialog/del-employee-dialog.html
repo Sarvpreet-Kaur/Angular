@@ -1,0 +1,91 @@
+<div class="modal-overlay" (click)="closeDialog()">
+
+    <div class="delete-modal" (click)="$event.stopPropagation()">
+
+        <!-- Header -->
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2>Delete Employee</h2>
+
+                <p>Remove an employee from the system.</p>
+
+            </div>
+
+            <button
+                class="close-btn"
+                (click)="closeDialog()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <!-- Warning -->
+
+        <div class="warning-section">
+
+            <div class="warning-icon">
+
+                ⚠
+
+            </div>
+
+            <h3>Delete Employee Record</h3>
+
+            <p>
+
+                This action permanently removes the employee
+                and cannot be undone.
+
+            </p>
+
+        </div>
+
+        <!-- Form -->
+
+        <form>
+
+            <div class="form-group">
+
+                <label>
+
+                    Employee ID <span>*</span>
+
+                </label>
+
+                <input
+                    type="text"
+                    placeholder="Enter Employee ID"
+                >
+
+            </div>
+
+            <div class="buttons">
+
+                <button
+                    type="button"
+                    class="cancel-btn">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="submit"
+                    class="delete-btn">
+
+                    Delete Employee
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

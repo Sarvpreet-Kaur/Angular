@@ -1,0 +1,323 @@
+/* ================= Overlay ================= */
+
+.modal-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(25,35,55,.45);
+
+    backdrop-filter:blur(5px);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:1000;
+
+}
+
+/* ================= Modal ================= */
+
+.delete-modal{
+
+    width:40vw;
+
+    max-width:550px;
+
+    min-width:420px;
+
+    background:#fffaf9;
+
+    border-radius:22px;
+
+    padding:30px;
+
+    border:1px solid #fed7d7;
+
+    box-shadow:0 25px 60px rgba(0,0,0,.22);
+
+    animation:popup .25s ease;
+
+}
+
+/* ================= Header ================= */
+
+.modal-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    margin-bottom:25px;
+
+}
+
+.modal-header h2{
+
+    margin:0;
+
+    color:#991b1b;
+
+    font-size:26px;
+
+}
+
+.modal-header p{
+
+    margin-top:6px;
+
+    color:#6b7280;
+
+}
+
+/* ================= Close ================= */
+
+.close-btn{
+
+    width:40px;
+
+    height:40px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:white;
+
+    color:#64748b;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    font-size:18px;
+
+    box-shadow:0 4px 10px rgba(0,0,0,.08);
+
+}
+
+.close-btn:hover{
+
+    background:#ef4444;
+
+    color:white;
+
+    transform:rotate(90deg);
+
+}
+
+/* ================= Warning ================= */
+
+.warning-section{
+
+    text-align:center;
+
+    background:#fff1f2;
+
+    border-radius:16px;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+}
+
+.warning-icon{
+
+    width:70px;
+
+    height:70px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:#ef4444;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:34px;
+
+    margin-bottom:15px;
+
+}
+
+.warning-section h3{
+
+    margin:0;
+
+    color:#991b1b;
+
+}
+
+.warning-section p{
+
+    margin-top:10px;
+
+    color:#6b7280;
+
+    line-height:1.5;
+
+}
+
+/* ================= Form ================= */
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.form-group label{
+
+    font-weight:600;
+
+    margin-bottom:8px;
+
+    color:#374151;
+
+}
+
+.form-group span{
+
+    color:#ef4444;
+
+}
+
+.form-group input{
+
+    padding:13px 16px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+.form-group input:focus{
+
+    border-color:#ef4444;
+
+    box-shadow:0 0 0 4px rgba(239,68,68,.12);
+
+}
+
+/* ================= Buttons ================= */
+
+.buttons{
+
+    margin-top:30px;
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:15px;
+
+}
+
+.cancel-btn{
+
+    border:none;
+
+    background:#e2e8f0;
+
+    color:#334155;
+
+    padding:12px 24px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.cancel-btn:hover{
+
+    background:#cbd5e1;
+
+}
+
+.delete-btn{
+
+    border:none;
+
+    background:#ef4444;
+
+    color:white;
+
+    padding:12px 26px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.delete-btn:hover{
+
+    background:#dc2626;
+
+}
+
+/* ================= Animation ================= */
+
+@keyframes popup{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(-20px) scale(.95);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0) scale(1);
+
+    }
+
+}
+
+/* ================= Responsive ================= */
+
+@media(max-width:768px){
+
+    .delete-modal{
+
+        width:90vw;
+
+        min-width:unset;
+
+        padding:24px;
+
+    }
+
+}
