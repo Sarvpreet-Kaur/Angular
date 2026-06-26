@@ -1,0 +1,106 @@
+<h2>Reactive Form Example</h2>
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+  <!-- Name -->
+  <label>Name</label><br>
+  <input type="text" formControlName="name">
+
+  <div *ngIf="userForm.get('name')?.touched && userForm.get('name')?.invalid">
+    Name is required (Minimum 3 characters)
+  </div>
+
+  <br><br>
+
+  <!-- Email -->
+  <label>Email</label><br>
+  <input type="email" formControlName="email">
+
+  <div *ngIf="userForm.get('email')?.touched && userForm.get('email')?.invalid">
+    Enter a valid email.
+  </div>
+
+  <br><br>
+
+  <!-- Password -->
+  <label>Password</label><br>
+  <input type="password" formControlName="password">
+
+  <br><br>
+
+  <!-- Confirm Password -->
+  <label>Confirm Password</label><br>
+  <input type="password" formControlName="confirmPassword">
+
+  <div *ngIf="userForm.errors?.['passwordMismatch'] && userForm.get('confirmPassword')?.touched">
+    Passwords do not match.
+  </div>
+
+  <br><br>
+
+  <!-- Age -->
+  <label>Age</label><br>
+  <input type="number" formControlName="age">
+
+  <div *ngIf="userForm.get('age')?.touched && userForm.get('age')?.invalid">
+    Age must be between 18 and 100.
+  </div>
+
+  <br><br>
+
+  <!-- Country -->
+  <label>Country</label><br>
+
+  <select formControlName="country">
+
+    <option value="">Select Country</option>
+
+    <option *ngFor="let country of countries" [value]="country">
+      {{country}}
+    </option>
+
+  </select>
+
+  <br><br>
+
+  <!-- Currency -->
+  <label>Currency</label><br>
+
+  <input type="text" formControlName="currency">
+
+  <br><br>
+
+  <!-- Subscribe -->
+  <label>
+
+    <input
+      type="checkbox"
+      formControlName="subscribe">
+
+    Subscribe to Newsletter
+
+  </label>
+
+  <br><br>
+
+  <!-- Search -->
+  <label>Search</label><br>
+
+  <input
+    type="text"
+    formControlName="search"
+    placeholder="Search here">
+
+  <br><br>
+
+  <button type="submit">
+    Submit
+  </button>
+
+</form>
+
+<hr>
+
+<h3>Live Form Value</h3>
+
+<pre>{{ userForm.value | json }}</pre>

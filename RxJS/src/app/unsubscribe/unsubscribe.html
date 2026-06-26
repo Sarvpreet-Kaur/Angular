@@ -1,0 +1,6 @@
+<p>unsubscribe works!</p>
+<ul>
+  @for (item of userList$ |async; track $index) {
+    <li>{{item.userName}}</li>
+  }
+</ul>
