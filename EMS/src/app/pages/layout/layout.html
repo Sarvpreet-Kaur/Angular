@@ -1,31 +1,50 @@
 <div class="layout">
 
-    <!-- Navbar -->
+    <!-- ================= NAVBAR ================= -->
+
     <nav class="navbar">
+
+        <!-- Left -->
 
         <div class="nav-left">
 
-            <button class="menu-btn" (click)="toggleSidebar()">
-                ☰
+            <button class="menu-btn"
+                    (click)="toggleSidebar()">
+
+                <i class="fa-solid fa-bars"></i>
+
             </button>
 
-            <h2>EMS Portal</h2>
+            <div class="logo-section">
+
+                <div class="logo-text">
+
+                    <h2>EMS Portal</h2>
+
+                    <span>Employee Management System</span>
+
+                </div>
+
+            </div>
 
         </div>
 
+        <!-- Right -->
+
         <div class="nav-right">
 
-            <button class="notification-btn">
-                Notifications
-            </button>
+            <div class="profile-card">
 
-            <div class="profile">
+                <img
+                    [src]="loggedUser?.profileImage"
+                    alt="Profile">
 
-                <img src="https://i.pravatar.cc/150?img=2" alt="Profile">
+                <div class="profile-details">
 
-                <div class="user-details">
-                    <h4>John Doe</h4>
-                    <p>Administrator</p>
+                    <h4>{{loggedUser?.firstName}} {{loggedUser?.lastName}}</h4>
+
+                    <p>{{loggedUser?.designation}}</p>
+
                 </div>
 
             </div>
@@ -34,54 +53,134 @@
 
     </nav>
 
-    <!-- Main Layout -->
 
-    <div class="main-container" [class.sidebar-collapsed]="!isSidebarOpen">
 
-        <!-- Sidebar -->
+    <!-- ================= MAIN ================= -->
 
-        <aside class="sidebar" [class.close]="!isSidebarOpen">
+    <div class="main-layout">
 
-            <div class="sidebar-header">
-                <h3>Employee Management</h3>
-                <p>Administration Panel</p>
+        <!-- ================= SIDEBAR ================= -->
+
+        <aside class="sidebar" [class.collapsed]="!isSidebarOpen">
+
+            <div class="sidebar-top">
+
+                <h3 *ngIf="isSidebarOpen">
+
+                    Navigate to: 
+
+                </h3>
+
             </div>
 
             <ul class="menu">
 
                 <li routerLinkActive="active">
-                    <a routerLink="/dashboard">Dashboard</a>
+
+                    <a routerLink="/dashboard">
+
+                        <i class="fa-solid fa-house"></i>
+
+                        <span *ngIf="isSidebarOpen">
+
+                            Dashboard
+
+                        </span>
+
+                    </a>
+
                 </li>
 
                 <li routerLinkActive="active">
-                    <a routerLink="/employee">Employee</a>
+
+                    <a routerLink="/employee">
+
+                        <i class="fa-solid fa-users"></i>
+
+                        <span *ngIf="isSidebarOpen">
+
+                            Employees
+
+                        </span>
+
+                    </a>
+
                 </li>
 
                 <li routerLinkActive="active">
-                    <a routerLink="/project">Project</a>
+
+                    <a routerLink="/project">
+
+                        <i class="fa-solid fa-diagram-project"></i>
+
+                        <span *ngIf="isSidebarOpen">
+
+                            Projects
+
+                        </span>
+
+                    </a>
+
                 </li>
 
                 <li routerLinkActive="active">
-                    <a routerLink="/projectEmployee">Project - Employee</a>
+
+                    <a routerLink="/projectEmployee">
+
+                        <i class="fa-solid fa-user-group"></i>
+
+                        <span *ngIf="isSidebarOpen">
+
+                            Assign Projects
+
+                        </span>
+
+                    </a>
+
                 </li>
 
-                <li routerLink="/settings" routerLinkActive="active">
-                    <span>Settings</span>
+                <li routerLinkActive="active">
+
+                    <a routerLink="/settings">
+
+                        <i class="fa-solid fa-gear"></i>
+
+                        <span *ngIf="isSidebarOpen">
+
+                            Settings
+
+                        </span>
+
+                    </a>
+
                 </li>
 
             </ul>
 
-            <div class="logout-section">
+            <!-- Bottom -->
 
-                <button class="logout-btn" (click)="logoff()">
-                    Logout
+            <div class="sidebar-bottom">
+
+                <button class="logout-btn"
+                        (click)="logoff()">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    <span *ngIf="isSidebarOpen">
+
+                        Logout
+
+                    </span>
+
                 </button>
 
             </div>
 
         </aside>
 
-        <!-- Routed Page -->
+
+
+        <!-- ================= CONTENT ================= -->
 
         <main class="content">
 

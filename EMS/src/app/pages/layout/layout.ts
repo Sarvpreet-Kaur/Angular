@@ -1,21 +1,45 @@
-import { Component, inject } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
+
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterOutlet, RouterLink],
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule
+  ],
   templateUrl: './layout.html',
-  styleUrl: './layout.css',
+  styleUrls: ['./layout.css']
 })
 export class Layout {
-  isSidebarOpen:boolean=false
-  router = inject(Router)
 
-  toggleSidebar(){
-    this.isSidebarOpen = !this.isSidebarOpen
+  isSidebarOpen = true;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
+
+  // Current Logged-in User
+  get loggedUser() {
+    return this.authService.getCurrentUser();
   }
 
-  logoff(){
-    this.router.navigateByUrl('login')
+  // Toggle Sidebar
+  toggleSidebar(): void {
+    this.isSidebarOpen = !this.isSidebarOpen;
   }
+
+  // Logout
+  logoff(): void {
+
+    this.authService.logout();
+
+    this.router.navigate(['/login']);
+
+  }
+
 }

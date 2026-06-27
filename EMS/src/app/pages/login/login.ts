@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginService } from './login.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+
+import { EmployeeService } from '../../services/employee.service';
+import { AuthService } from '../../services/auth.service';
+
 @Component({
   selector: 'app-login',
-  imports:[FormsModule, CommonModule],
+  standalone: true,
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.html',
   styleUrls: ['./login.css']
 })
@@ -15,71 +19,64 @@ export class Login {
     userName: '',
     password: ''
   };
-  
-  // UI Variables
-  
 
   showPassword = false;
-
   rememberMe = false;
-
   isLoading = false;
-
   errorMessage = '';
 
-  
-  // Constructor
   constructor(
-    private loginService: LoginService,
+    private employeeService: EmployeeService,
+    private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
-  
-  // Toggle Password
   togglePassword(): void {
-
     this.showPassword = !this.showPassword;
-
   }
 
-  
-  // Login
-  onLogin() {
+  onLogin(): void {
 
-  this.loginService.login().subscribe({
+    this.errorMessage = '';
+    this.isLoading = true;
 
-    next: (employees) => {
+    this.employeeService.getEmployees().subscribe({
 
-      const user = employees.find(emp =>
-        emp.email === this.loginObj.userName &&
-        emp.password === this.loginObj.password
-      );
+      next: (employees) => {
 
-      if (user) {
-
-        localStorage.setItem(
-          'loggedUser',
-          JSON.stringify(user)
+        const user = employees.find(emp =>
+          emp.email === this.loginObj.userName &&
+          emp.password === this.loginObj.password
         );
 
-        this.router.navigate(['/dashboard']);
+        this.isLoading = false;
 
-      } else {
+        if (user) {
 
-        this.errorMessage = 'Invalid username or password';
+          // Save logged-in user
+          this.authService.login(user);
+
+          // Navigate
+          this.router.navigate(['/dashboard']);
+
+        } else {
+
+          this.errorMessage = 'Invalid username or password';
+
+        }
+
+      },
+
+      error: () => {
+
+        this.isLoading = false;
+
+        this.errorMessage = 'Unable to connect to the server';
 
       }
 
-    },
+    });
 
-    error: () => {
-
-      this.errorMessage = 'Unable to connect to the server';
-
-    }
-
-  });
-
-}
+  }
 
 }
