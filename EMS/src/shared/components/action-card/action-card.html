@@ -1,0 +1,59 @@
+<div
+    class="action-card"
+    (click)="onAction()">
+
+    <div class="background-glow"></div>
+
+    <!-- Icon -->
+
+    <div class="icon-wrapper">
+
+        <ng-content select="[card-icon]"></ng-content>
+
+    </div>
+
+    <!-- Content -->
+
+    <div class="content">
+
+        <h3>
+
+            {{ title }}
+
+        </h3>
+
+        <p>
+
+            {{ description }}
+
+        </p>
+
+    </div>
+
+    <!-- Footer -->
+
+    <div class="footer">
+
+        <span>
+
+            {{ actionText }}
+
+        </span>
+
+        <svg
+            class="arrow"
+            viewBox="0 0 24 24"
+            fill="none">
+
+            <path
+                d="M5 12H19M13 6L19 12L13 18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"/>
+
+        </svg>
+
+    </div>
+
+</div>

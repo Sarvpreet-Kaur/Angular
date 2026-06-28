@@ -1,0 +1,187 @@
+ :host {
+
+     display: block;
+
+     font-family: 'Inter', sans-serif;
+
+ }
+
+ .project-card {
+
+     position: relative;
+
+     overflow: hidden;
+
+     padding: 28px;
+
+     border-radius: 28px;
+
+     background:
+
+         linear-gradient(145deg,
+
+             rgba(255, 255, 255, .78),
+
+             rgba(255, 255, 255, .55));
+
+     backdrop-filter: blur(22px);
+
+     border: 1px solid rgba(255, 255, 255, .65);
+
+     box-shadow:
+
+         0 15px 40px rgba(63, 44, 111, .08),
+
+         0 30px 60px rgba(141, 169, 245, .12);
+
+     transition: .35s;
+
+ }
+
+ .project-card:hover {
+
+     transform: translateY(-8px);
+
+     box-shadow:
+
+         0 25px 55px rgba(63, 44, 111, .14),
+
+         0 40px 80px rgba(141, 169, 245, .16);
+
+ }
+
+ .top-glow {
+
+     position: absolute;
+
+     right: -80px;
+
+     top: -80px;
+
+     width: 180px;
+
+     height: 180px;
+
+     background:
+
+         radial-gradient(#BACDFA,
+
+             transparent);
+
+     opacity: .55;
+
+ }
+
+ .header h2 {
+
+     margin: 0;
+
+     font-size: 1.4rem;
+
+     color: #3F2C6F;
+
+ }
+
+ .header p {
+
+     margin: 10px 0 0;
+
+     color: #6C52B0;
+
+     line-height: 1.5;
+
+ }
+
+ .chips {
+
+     display: flex;
+
+     gap: 14px;
+
+     margin: 28px 0;
+
+     flex-wrap: wrap;
+
+ }
+
+ .divider {
+
+     height: 1px;
+
+     background: rgba(108, 82, 176, .12);
+
+     margin: 22px 0;
+
+ }
+
+ .manager,
+
+ .team {
+
+     display: flex;
+
+     justify-content: space-between;
+
+     align-items: center;
+
+     margin-bottom: 16px;
+
+ }
+
+ .label {
+
+     font-size: .88rem;
+
+     color: #6C52B0;
+
+ }
+
+ .value {
+
+     font-weight: 700;
+
+     color: #3F2C6F;
+
+ }
+
+ .view-btn {
+
+     margin-top: 26px;
+
+     width: 100%;
+
+     padding: 15px;
+
+     border: none;
+
+     border-radius: 18px;
+
+     background:
+
+         linear-gradient(135deg,
+
+             #8DA9F5,
+
+             #9D8AE0);
+
+     color: white;
+
+     font-size: .95rem;
+
+     font-weight: 600;
+
+     cursor: pointer;
+
+     transition: .3s;
+
+ }
+
+ .view-btn:hover {
+
+     transform: translateY(-3px);
+
+     box-shadow:
+
+         0 12px 24px rgba(141, 169, 245, .35);
+
+ }

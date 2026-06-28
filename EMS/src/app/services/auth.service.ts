@@ -1,59 +1,58 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { Employee } from '../../shared/models/employee.model';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
-  // Holds the logged-in user
-  private currentUserSignal = signal<any | null>(null);
 
-  // Readonly signal for components
-  readonly currentUser = this.currentUserSignal.asReadonly();
+  private currentUserSubject =
+    new BehaviorSubject<Employee | null>(null);
 
-  // Whether user is logged in
-  readonly isLoggedIn = computed(() => this.currentUser() !== null);
+  currentUser$ = this.currentUserSubject.asObservable();
 
   constructor() {
-    // Restore user after page refresh
-    const storedUser = localStorage.getItem('loggedUser');
 
-    if (storedUser) {
-      this.currentUserSignal.set(JSON.parse(storedUser));
+    const user = localStorage.getItem('loggedUser');
+
+    if (user) {
+
+      this.currentUserSubject.next(JSON.parse(user));
+
     }
+
   }
 
-  /**
-   * Save logged-in user
-   */
-  login(user: any): void {
-    this.currentUserSignal.set(user);
+  login(user: Employee) {
 
-    localStorage.setItem('loggedUser', JSON.stringify(user));
+    localStorage.setItem(
+      'loggedUser',
+      JSON.stringify(user)
+    );
+
+    this.currentUserSubject.next(user);
+
   }
 
-  /**
-   * Returns current user
-   */
-  getCurrentUser() {
-    return this.currentUser();
-  }
-
-  /**
-   * Update user details
-   * Useful when profile gets edited
-   */
-  updateCurrentUser(user: any): void {
-    this.currentUserSignal.set(user);
-
-    localStorage.setItem('loggedUser', JSON.stringify(user));
-  }
-
-  /**
-   * Logout
-   */
-  logout(): void {
-    this.currentUserSignal.set(null);
+  logout() {
 
     localStorage.removeItem('loggedUser');
+
+    this.currentUserSubject.next(null);
+
   }
+
+  getCurrentUser() {
+
+    return this.currentUserSubject.value;
+
+  }
+
+  isLoggedIn(): boolean {
+
+    return this.currentUserSubject.value != null;
+
+  }
+
 }

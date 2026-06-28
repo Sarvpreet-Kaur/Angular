@@ -1,0 +1,206 @@
+:host {
+    display: inline-flex;
+}
+
+/*------------------------------------------------*/
+/* Pill */
+/*------------------------------------------------*/
+
+.status-pill {
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 16px;
+
+    border-radius: 999px;
+
+    backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255,255,255,.25);
+
+    transition: all .3s ease;
+
+    font-size: .82rem;
+    font-weight: 600;
+
+    user-select: none;
+}
+
+/*------------------------------------------------*/
+/* Hover */
+/*------------------------------------------------*/
+
+.status-pill:hover{
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 12px 30px rgba(0,0,0,.08);
+
+}
+
+/*------------------------------------------------*/
+/* Dot */
+/*------------------------------------------------*/
+
+.status-dot{
+
+    width:10px;
+    height:10px;
+
+    border-radius:50%;
+
+    flex-shrink:0;
+
+}
+
+.status-text{
+
+    white-space: nowrap;
+
+}
+
+/*------------------------------------------------*/
+/* Active */
+/*------------------------------------------------*/
+
+.active{
+
+    background: rgba(75, 181, 67, .15);
+
+    color:#1D7A29;
+
+}
+
+.active .status-dot{
+
+    background:#34C759;
+
+}
+
+/*------------------------------------------------*/
+/* Inactive */
+/*------------------------------------------------*/
+
+.inactive{
+
+    background: rgba(160,160,160,.18);
+
+    color:#6C757D;
+
+}
+
+.inactive .status-dot{
+
+    background:#8C8C8C;
+
+}
+
+/*------------------------------------------------*/
+/* On Leave */
+/*------------------------------------------------*/
+
+.leave{
+
+    background: rgba(255,193,7,.18);
+
+    color:#B88700;
+
+}
+
+.leave .status-dot{
+
+    background:#FFC107;
+
+}
+
+/*------------------------------------------------*/
+/* Completed */
+/*------------------------------------------------*/
+
+.completed{
+
+    background: rgba(0,200,83,.18);
+
+    color:#1E7E34;
+
+}
+
+.completed .status-dot{
+
+    background:#00C853;
+
+}
+
+/*------------------------------------------------*/
+/* Pending */
+/*------------------------------------------------*/
+
+.pending{
+
+    background: rgba(255,152,0,.16);
+
+    color:#D97706;
+
+}
+
+.pending .status-dot{
+
+    background:#FF9800;
+
+}
+
+/*------------------------------------------------*/
+/* Progress */
+/*------------------------------------------------*/
+
+.progress{
+
+    background: rgba(72,149,239,.16);
+
+    color:#2563EB;
+
+}
+
+.progress .status-dot{
+
+    background:#4895EF;
+
+}
+
+/*------------------------------------------------*/
+/* Delayed */
+/*------------------------------------------------*/
+
+.delayed{
+
+    background: rgba(239,68,68,.18);
+
+    color:#C62828;
+
+}
+
+.delayed .status-dot{
+
+    background:#EF4444;
+
+}
+
+/*------------------------------------------------*/
+/* Default */
+/*------------------------------------------------*/
+
+.default{
+
+    background: rgba(227,234,247,.45);
+
+    color:#3F2C6F;
+
+}
+
+.default .status-dot{
+
+    background:#6C52B0;
+
+}

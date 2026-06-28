@@ -1,0 +1,79 @@
+<div class="project-card">
+
+    <div class="top-glow"></div>
+
+    <div class="header">
+
+        <h2>
+
+            {{project.projectName}}
+
+        </h2>
+
+        <p>
+
+            {{project.description}}
+
+        </p>
+
+    </div>
+
+    <div class="chips">
+
+        <app-status-pill
+            [status]="project.status">
+        </app-status-pill>
+
+        <app-priority-badge
+            [priority]="project.priority">
+        </app-priority-badge>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="manager"> 
+
+        <span class="label">
+
+            Project Manager
+
+        </span>
+
+        <span class="value">
+
+            {{managerName}}
+
+        </span>
+
+    </div>
+
+    <div class="team">
+
+        <span class="label">
+
+            Team Members
+
+        </span>
+
+        <span class="value">
+
+            {{teamSize}}
+
+        </span>
+
+    </div>
+
+    <div class="divider"></div>
+
+    <button
+
+        class="view-btn"
+
+        (click)="view.emit(project)">
+
+        View Details
+
+    </button>
+
+</div>

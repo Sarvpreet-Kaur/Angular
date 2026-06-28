@@ -1,0 +1,57 @@
+/*==================================================
+Textarea
+==================================================*/
+
+.form-group textarea {
+
+    width: 100%;
+
+    min-height: 140px;
+
+    resize: vertical;
+
+    padding: 16px 18px;
+
+    border-radius: 18px;
+
+    border: 1px solid rgba(157,138,224,.18);
+
+    background: rgba(255,255,255,.72);
+
+    backdrop-filter: blur(10px);
+
+    color: #3F2C6F;
+
+    font-size: .95rem;
+
+    font-family: inherit;
+
+    transition: .3s;
+
+    outline: none;
+
+    box-sizing: border-box;
+
+}
+
+.form-group textarea::placeholder {
+
+    color: #8D87AB;
+
+}
+
+.form-group textarea:hover {
+
+    border-color: #8DA9F5;
+
+}
+
+.form-group textarea:focus {
+
+    border-color: #6C52B0;
+
+    background: rgba(255,255,255,.92);
+
+    box-shadow: 0 0 0 4px rgba(108,82,176,.10);
+
+}

@@ -1,0 +1,320 @@
+<app-modal [title]="modalTitle" [isOpen]="isOpen" width="920px" (closed)="onCancel()">
+
+    <form class="project-form" [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+
+        <!-- ========================================= -->
+        <!-- Header -->
+        <!-- ========================================= -->
+
+        <div class="project-header">
+
+            <div class="project-icon">
+
+                <svg viewBox="0 0 24 24" fill="none">
+
+                    <rect x="3" y="4" width="18" height="16" rx="3" stroke="currentColor" stroke-width="2" />
+
+                    <path d="M8 8H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+
+                    <path d="M8 12H13" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+
+                </svg>
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    {{ isEditMode ? 'Edit Project' : 'Create New Project' }}
+
+                </h3>
+
+                <p>
+
+                    Enter the project information and assign team members.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- ========================================= -->
+        <!-- Form Grid -->
+        <!-- ========================================= -->
+
+        <div class="form-grid">
+
+            <!-- Project Name -->
+
+            <div class="form-group">
+
+                <label>
+
+                    Project Name
+
+                </label>
+
+                <input type="text" formControlName="projectName" placeholder="Employee Management System">
+
+                <small *ngIf="isInvalid('projectName')">
+
+                    Project name is required.
+
+                </small>
+
+            </div>
+
+            <!-- Client -->
+
+            <div class="form-group">
+
+                <label>
+
+                    Client Name
+
+                </label>
+
+                <input type="text" formControlName="clientName" placeholder="Microsoft">
+
+                <small *ngIf="isInvalid('clientName')">
+
+                    Client name is required.
+
+                </small>
+
+            </div>
+
+            <!-- Manager -->
+
+            <!-- <div class="form-group">
+
+                <label>
+
+                    Project Manager
+
+                </label>
+
+                <small *ngIf="isInvalid('managerId')">
+
+                    Select a project manager.
+
+                </small>
+
+            </div> -->
+
+            <!-- Priority -->
+
+            <div class="form-group">
+
+                <label>
+
+                    Priority
+
+                </label>
+
+                <select formControlName="priority">
+
+                    <option value="Low">
+
+                        Low
+
+                    </option>
+
+                    <option value="Medium">
+
+                        Medium
+
+                    </option>
+
+                    <option value="High">
+
+                        High
+
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- Status -->
+
+            <div class="form-group">
+
+                <label>
+
+                    Status
+
+                </label>
+
+                <select formControlName="status">
+
+                    <option value="Planning">
+
+                        Planning
+
+                    </option>
+
+                    <option value="In Progress">
+
+                        In Progress
+
+                    </option>
+
+                    <option value="Completed">
+
+                        Completed
+
+                    </option>
+
+                    <option value="On Hold">
+
+                        On Hold
+
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- Progress -->
+
+            <div class="form-group">
+
+                <label>
+
+                    Progress (%)
+
+                </label>
+
+                <input type="number" min="0" max="100" formControlName="progress">
+
+                <small *ngIf="isInvalid('progress')">
+
+                    Progress must be between 0 and 100.
+
+                </small>
+
+            </div>
+
+            <!-- Start Date -->
+
+            <div class="form-group">
+
+                <label>
+
+                    Start Date
+
+                </label>
+
+                <input type="date" formControlName="startDate">
+
+                <small *ngIf="isInvalid('startDate')">
+
+                    Start date is required.
+
+                </small>
+
+            </div>
+
+            <!-- End Date -->
+
+            <div class="form-group">
+
+                <label>
+
+                    End Date
+
+                </label>
+
+                <input type="date" formControlName="endDate">
+
+                <small *ngIf="isInvalid('endDate')">
+
+                    End date is required.
+
+                </small>
+
+            </div>
+
+        </div>
+
+        <!-- ========================================= -->
+        <!-- Description -->
+        <!-- ========================================= -->
+
+        <div class="form-group full-width">
+
+            <label>
+
+                Project Description
+
+            </label>
+
+            <textarea rows="5" formControlName="description"
+                placeholder="Write a short description about the project...">
+
+            </textarea>
+
+            <small *ngIf="isInvalid('description')">
+
+                Description should contain at least 10 characters.
+
+            </small>
+
+        </div>
+
+        <!-- ========================================= -->
+        <!-- Team Members -->
+        <!-- ========================================= -->
+
+        <div class="form-group full-width">
+
+            <label>
+
+                Team Members
+
+            </label>
+
+            <select multiple formControlName="employeeIds">
+
+                <option *ngFor="let employee of employees" [ngValue]="employee.id">
+
+                    {{ employee.firstName }} {{ employee.lastName }}
+
+                </option>
+
+            </select>
+
+            <span class="helper-text">
+
+                Hold Ctrl (Windows) or Cmd (Mac) to select multiple employees.
+
+            </span>
+
+        </div>
+
+        <!-- ========================================= -->
+        <!-- Footer -->
+        <!-- ========================================= -->
+
+        <div class="form-actions">
+
+            <button type="button" class="secondary-btn" (click)="onCancel()">
+
+                Cancel
+
+            </button>
+
+            <button type="submit" class="primary-btn">
+
+                {{ submitButtonText }}
+
+            </button>
+
+        </div>
+
+    </form>
+
+</app-modal>

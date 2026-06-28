@@ -1,0 +1,76 @@
+<app-modal
+    [title]="title"
+    [isOpen]="isOpen"
+    width="480px"
+    (closed)="onCancel()">
+
+    <div class="dialog-container">
+
+        <div class="warning-icon">
+
+            <svg
+                viewBox="0 0 24 24"
+                fill="none">
+
+                <path
+                    d="M12 8V13"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"/>
+
+                <circle
+                    cx="12"
+                    cy="17"
+                    r="1"
+                    fill="currentColor"/>
+
+                <path
+                    d="M10.29 3.86L1.82 18A2 2 0 003.53 21H20.47A2 2 0 0022.18 18L13.71 3.86A2 2 0 0010.29 3.86Z"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linejoin="round"/>
+
+            </svg>
+
+        </div>
+
+        <p class="message">
+
+            {{ message }}
+
+        </p>
+
+        <div class="actions">
+
+            <button
+                class="cancel-btn"
+                (click)="onCancel()">
+
+                {{ cancelText }}
+
+            </button>
+
+            <button
+                class="delete-btn"
+                [disabled]="loading"
+                (click)="onConfirm()">
+
+                <span *ngIf="!loading">
+
+                    {{ confirmText }}
+
+                </span>
+
+                <span *ngIf="loading">
+
+                    Deleting...
+
+                </span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+</app-modal>

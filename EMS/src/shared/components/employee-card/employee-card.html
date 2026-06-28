@@ -1,0 +1,125 @@
+<div class="employee-card">
+
+    <!-- Decorative Gradient -->
+    <div class="card-bg"></div>
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="employee-header">
+
+        <div class="avatar-wrapper">
+
+            <img
+                [src]="employee.profileImage"
+                [alt]="employee.firstName"
+                class="avatar">
+
+        </div>
+
+        <h2>
+
+            {{employee.firstName}}
+            {{employee.lastName}}
+
+        </h2>
+
+        <p>
+
+            {{employee.designation}}
+
+        </p>
+
+        <span
+            class="status-pill"
+            [ngClass]="employee.status.toLowerCase().replace(' ','-')">
+
+            <span class="status-dot"></span>
+
+            {{employee.status}}
+
+        </span>
+
+    </div>
+
+    <!-- ================= CONTACT ================= -->
+
+    <div class="contact-section">
+
+        <div class="contact-item">
+
+            <svg class="icon" viewBox="0 0 24 24" fill="none">
+                <path
+                    d="M4 6H20V18H4V6ZM4 7L12 13L20 7"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linejoin="round"/>
+            </svg>
+
+            <span>{{employee.email}}</span>
+
+        </div>
+
+        <div class="contact-item">
+
+            <svg class="icon" viewBox="0 0 24 24" fill="none">
+                <path
+                    d="M22 16.9V20C22 20.5 21.6 21 21 21C10.5 21 3 13.5 3 3C3 2.4 3.4 2 4 2H7"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"/>
+            </svg>
+
+            <span>{{employee.phone}}</span>
+
+        </div>
+
+    </div>
+
+    <!-- ================= INFO ================= -->
+
+    <div class="info-grid">
+
+        <div class="info-card">
+
+            <span class="label">
+
+                Department
+
+            </span>
+
+            <span class="value">
+
+                {{employee.department}}
+
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- ================= PROJECTS ================= -->
+
+    <div class="project-summary">
+
+        <span>
+
+            Assigned Projects
+
+        </span>
+
+        <h3>
+
+            {{employee.projectId.length || 0}}
+
+        </h3>
+
+    </div>
+    <!-- ================= ACTIONS ================= -->
+
+    <div class="actions">
+
+        <ng-content></ng-content>
+
+    </div>
+
+</div>

@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --bg-primary: #E3EAF7;
+    --bg-secondary: #E1D9F1;
+    --primary: #8DA9F5;
+    --secondary: #9D8AE0;
+    --text-primary: #3F2C6F;
+    --text-secondary: #6C52B0;
+    --surface: rgba(255, 255, 255, .55);
+    --border: rgba(255, 255, 255, .65);
+}

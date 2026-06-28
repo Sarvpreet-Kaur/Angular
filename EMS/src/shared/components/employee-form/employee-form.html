@@ -1,0 +1,282 @@
+<app-modal
+    [title]="modalTitle"
+    [isOpen]="isOpen"
+    width="900px"
+    (closed)="onCancel()">
+
+    <form
+        [formGroup]="employeeForm"
+        (ngSubmit)="onSubmit()"
+        class="employee-form">
+
+        <div class="profile-section">
+
+            <div class="profile-avatar">
+
+                <img
+                    *ngIf="employeeForm.get('profileImage')?.value"
+                    [src]="employeeForm.get('profileImage')?.value"
+                    alt="Employee">
+
+                <svg
+                    *ngIf="!employeeForm.get('profileImage')?.value"
+                    viewBox="0 0 24 24">
+
+                    <circle
+                        cx="12"
+                        cy="8"
+                        r="4"
+                        fill="currentColor"/>
+
+                    <path
+                        d="M4 20c1.8-4 5-6 8-6s6.2 2 8 6"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"/>
+
+                </svg>
+
+            </div>
+
+            <div>
+
+                <h3>{{ modalTitle }}</h3>
+
+                <p>
+                    Fill in the employee information below.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+
+                <label>First Name</label>
+
+                <input
+                    type="text"
+                    formControlName="firstName"
+                    placeholder="John">
+
+                <small *ngIf="isInvalid('firstName')">
+                    First name is required.
+                </small>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Last Name</label>
+
+                <input
+                    type="text"
+                    formControlName="lastName"
+                    placeholder="Doe">
+
+                <small *ngIf="isInvalid('lastName')">
+                    Last name is required.
+                </small>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    formControlName="email"
+                    placeholder="john@example.com">
+
+                <small *ngIf="isInvalid('email')">
+                    Enter a valid email.
+                </small>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Phone</label>
+
+                <input
+                    type="text"
+                    formControlName="phone"
+                    placeholder="9876543210">
+
+                <small *ngIf="isInvalid('phone')">
+                    Enter a valid phone number.
+                </small>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Designation</label>
+
+                <input
+                    type="text"
+                    formControlName="designation"
+                    placeholder="Software Engineer">
+
+                <small *ngIf="isInvalid('designation')">
+                    Designation is required.
+                </small>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Department</label>
+
+                <input
+                    type="text"
+                    formControlName="department"
+                    placeholder="Engineering">
+
+                <small *ngIf="isInvalid('department')">
+                    Department is required.
+                </small>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Salary</label>
+
+                <input
+                    type="number"
+                    formControlName="salary"
+                    placeholder="50000">
+
+                <small *ngIf="isInvalid('salary')">
+                    Salary must be greater than 1000.
+                </small>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Status</label>
+
+                <select formControlName="status">
+
+                    <option value="Active">Active</option>
+
+                    <option value="Inactive">Inactive</option>
+
+                    <option value="On Leave">On Leave</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Joining Date</label>
+
+                <input
+                    type="date"
+                    formControlName="joiningDate">
+
+                <small *ngIf="isInvalid('joiningDate')">
+                    Joining date is required.
+                </small>
+
+            </div>
+
+            <div class="form-group full-width">
+
+                <label>Address</label>
+
+                <textarea
+                    rows="3"
+                    formControlName="address"
+                    placeholder="Enter complete address">
+                </textarea>
+
+                <small *ngIf="isInvalid('address')">
+                    Address is required.
+                </small>
+
+            </div>
+
+            <div class="form-group full-width">
+
+                <label>Profile Image URL</label>
+
+                <input
+                    type="text"
+                    formControlName="profileImage"
+                    placeholder="https://example.com/profile.jpg">
+
+            </div>
+
+            <div
+                class="form-group full-width"
+                *ngIf="!isEditMode">
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    formControlName="password"
+                    placeholder="Enter password">
+
+            </div>
+
+            <div class="form-group full-width">
+
+                <label>Assigned Projects</label>
+
+                <select
+                    multiple
+                    formControlName="projectId">
+
+                    <option
+                        *ngFor="let project of projects"
+                        [value]="project.id">
+
+                        {{ project.projectName }}
+
+                    </option>
+
+                </select>
+
+                <span class="helper-text">
+
+                    Hold Ctrl (Windows) or Cmd (Mac) to select multiple projects.
+
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="form-actions">
+
+            <button
+                type="button"
+                class="secondary-btn"
+                (click)="onCancel()">
+
+                Cancel
+
+            </button>
+
+            <button
+                type="submit"
+                class="primary-btn">
+
+                {{ submitButtonText }}
+
+            </button>
+
+        </div>
+
+    </form>
+
+</app-modal>

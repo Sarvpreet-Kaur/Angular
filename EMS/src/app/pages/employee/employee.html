@@ -1,147 +1,166 @@
-<!-- <div class="employee-page">
+<div class="employee-page">
 
     <div class="page-header">
 
         <div>
-            <h2>Employees</h2>
-            <p>Manage employee records and assignments</p>
+
+            <h1>Employees</h1>
+
+            <p>
+                Manage your workforce, assignments and employee information.
+            </p>
+
         </div>
 
-        <div class="header-actions">
+        <button
+            class="add-btn"
+            (click)="openAddForm()">
 
-            <div class="search-box">
-                <input
-                    type="text"
-                    placeholder="Search employee..."
-                />
+            <span>＋</span>
+
+            Add Employee
+
+        </button>
+
+    </div>
+
+    <div class="toolbar">
+
+        <div class="search-container">
+
+            <svg
+                class="search-icon"
+                viewBox="0 0 24 24"
+                fill="none">
+
+                <circle
+                    cx="11"
+                    cy="11"
+                    r="7"
+                    stroke="currentColor"
+                    stroke-width="2"/>
+
+                <path
+                    d="M20 20L17 17"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"/>
+
+            </svg>
+
+            <input
+                type="text"
+                placeholder="Search employees..."
+                [value]="searchText"
+                (input)="onSearch($event)">
+
+        </div>
+
+        <div class="stats">
+
+            <div class="stat-card">
+
+                <span>{{totalEmployees}}</span>
+
+                <small>Total Employees</small>
+
             </div>
 
-            <select>
-                <option>All</option>
-                <option>Assigned</option>
-                <option>Not Assigned</option>
-                <option>Active</option>
-                <option>Inactive</option>
-            </select>
+            <div class="stat-card">
 
-            <button class="add-btn">
-                + Add Employee
-            </button>
+                <span>{{activeEmployees}}</span>
 
-            <button class="delete-btn">
-                Delete
-            </button>
+                <small>Active</small>
+
+            </div>
+
+            <div class="stat-card">
+
+                <span>{{onLeaveEmployees}}</span>
+
+                <small>On Leave</small>
+
+            </div>
 
         </div>
 
     </div>
 
+    <div
+        *ngIf="loading"
+        class="loading-state">
 
-    <div class="table-card">
+        <div class="loader"></div>
 
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>Photo</th>
-
-                    <th>ID</th>
-
-                    <th>Name</th>
-
-                    <th>Email</th>
-
-                    <th>Current Project</th>
-
-                    <th>Status</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-                <tr>
-
-                    <td>
-                        <img
-                            src="https://i.pravatar.cc/40?img=10"
-                            class="profile"
-                        >
-                    </td>
-
-                    <td>EMP1001</td>
-
-                    <td>John Doe</td>
-
-                    <td>john@gmail.com</td>
-
-                    <td>Employee Management</td>
-
-                    <td>
-                        <span class="status active">
-                            Active
-                        </span>
-                    </td>
-
-                </tr>
-
-                <tr>
-
-                    <td>
-                        <img
-                            src="https://i.pravatar.cc/40?img=18"
-                            class="profile"
-                        >
-                    </td>
-
-                    <td>EMP1002</td>
-
-                    <td>Sarah Smith</td>
-
-                    <td>sarah@gmail.com</td>
-
-                    <td>Not Assigned</td>
-
-                    <td>
-                        <span class="status idle">
-                            Idle
-                        </span>
-                    </td>
-
-                </tr>
-
-                <tr>
-
-                    <td>
-                        <img
-                            src="https://i.pravatar.cc/40?img=24"
-                            class="profile"
-                        >
-                    </td>
-
-                    <td>EMP1003</td>
-
-                    <td>Alex Johnson</td>
-
-                    <td>alex@gmail.com</td>
-
-                    <td>Payroll Portal</td>
-
-                    <td>
-                        <span class="status active">
-                            Active
-                        </span>
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
+        <p>Loading employees...</p>
 
     </div>
 
-</div> -->
+    <div
+        *ngIf="!loading && filteredEmployees.length===0"
+        class="empty-state">
+
+        <h2>No Employees Found</h2>
+
+        <p>
+            Start by adding your first employee.
+        </p>
+
+        <button
+            class="add-btn"
+            (click)="openAddForm()">
+
+            Add Employee
+
+        </button>
+
+    </div>
+
+    <div
+        class="employee-grid"
+        *ngIf="!loading && filteredEmployees.length">
+
+        <app-employee-card
+
+            *ngFor="
+                let employee of filteredEmployees;
+                trackBy: trackByEmployee
+            "
+
+            [employee]="employee">
+            <div class = "employee-actions">
+            <button
+                class="card-btn edit-btn"
+                (click)="openEditForm(employee)">
+
+                Edit
+
+            </button>
+
+            <button
+                class="card-btn delete-btn"
+                (click)="deleteEmployee(employee)">
+
+                Delete
+
+            </button>
+            </div>
+
+        </app-employee-card>
+
+    </div>
+        <app-employee-form
+
+        [isOpen]="isFormOpen"
+
+        [employee]="selectedEmployee"
+
+        [projects]="projects"
+
+        (save)="saveEmployee($event)"
+
+        (cancel)="closeForm()">
+
+    </app-employee-form>
+
+</div>

@@ -1,1 +1,338 @@
-<p>dashboard works!</p>
+<div class="dashboard">
+    <!-- Welcome Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-tag">
+                Enterprise Employee Management
+            </span>
+            <h1>
+                Welcome Back 
+            </h1>
+            <p>
+                Monitor your workforce, track ongoing projects and manage your
+                organization from one centralized dashboard.
+            </p>
+        </div>
+        <div class="hero-info">
+            <div class="hero-stat">
+                <span class="hero-label">
+                    Employees
+                </span>
+                <h2>
+                    {{ totalEmployees }}
+                </h2>
+            </div>
+            <div class="hero-divider"></div>
+            <div class="hero-stat">
+                <span class="hero-label">
+                    Projects
+                </span>
+                <h2>
+                    {{ totalProjects }}
+                </h2>
+            </div>
+        </div>
+    </section>
+    <!-- Loading -->
+
+
+    <div class="loading-container" *ngIf="loading">
+        <div class="loader"></div>
+        <p>
+            Loading Dashboard...
+        </p>
+    </div>
+
+    <!-- Dashboard Content -->
+    <ng-container *ngIf="!loading">
+        <!-- KPI Section -->
+        <section class="dashboard-section">
+            <div class="section-header">
+                <div>
+                    <h2>
+                        Overview
+                    </h2>
+                    <p>
+                        Real-time business insights
+                    </p>
+                </div>
+            </div>
+            <div class="kpi-grid">
+                <app-kpi-card title="Total Employees" [value]="totalEmployees" subtitle="Across all departments"
+                    trend="+12%" [trendPositive]="true" icon="employees">
+                </app-kpi-card>
+                <app-kpi-card title="Projects" [value]="totalProjects" subtitle="Currently active" trend="+8%"
+                    [trendPositive]="true" icon="projects">
+                </app-kpi-card>
+                <app-kpi-card title="Active Employees" [value]="activeEmployees" subtitle="Working today" trend="+3%"
+                    [trendPositive]="true" icon="active">
+                </app-kpi-card>
+                <app-kpi-card title="Completed Projects" [value]="completedProjects" subtitle="Delivered successfully"
+                    trend="+18%" [trendPositive]="true" icon="projects">
+                </app-kpi-card>
+            </div>
+        </section>
+
+
+        <!-- Quick Actions -->
+
+        <!-- <section class="dashboard-section">
+            <div class="section-header">
+                <div>
+                    <h2>
+                        Quick Actions
+                    </h2>
+                    <p>
+                        Frequently used operations
+                    </p>
+                </div>
+            </div> -->
+
+            <!-- <div class="action-grid">
+                <app-action-card title="Employees" description="View and manage all employees" actionText="Open"
+                    (action)="goToEmployees()">
+                </app-action-card>
+                <app-action-card title="Projects" description="Monitor active projects" actionText="Open"
+                    (action)="goToProjects()">
+                </app-action-card>
+            </div> 
+        </section> -->
+
+        <section class="dashboard-section">
+
+            <div class="dashboard-grid">
+
+                <!-- ================================ -->
+                <!-- Active Projects -->
+                <!-- ================================ -->
+
+                <div class="dashboard-panel">
+
+                    <div class="section-header">
+                        <div>
+                            <h2>
+                                Active Projects
+                            </h2>
+                            <p>
+                                Projects currently in progress
+                            </p>
+                        </div>
+                        <button
+                            class="text-btn"
+                            (click)="goToProjects()">
+                            View All
+                        </button>
+                    </div>
+                    <div
+                        class="project-grid"
+                        *ngIf="activeProjects.length > 0; else projectEmpty">
+                        <app-project-card
+                            *ngFor="let project of activeProjects"
+                            [project]="project"
+                            [teamSize]="getTeamSize(project)">
+
+                        </app-project-card>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================= -->
+        <!-- Activity Timeline -->
+        <!-- ========================================= -->
+
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+
+                        Recent Activity
+
+                    </h2>
+
+                    <p>
+
+                        Latest updates across the organization
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="activity-card">
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot active"></div>
+
+                    <div>
+
+                        <h4>
+
+                            New Employee Joined
+
+                        </h4>
+
+                        <p>
+
+                            A new employee has been added to the Engineering
+                            department.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot progress"></div>
+
+                    <div>
+
+                        <h4>
+
+                            Project Progress Updated
+
+                        </h4>
+
+                        <p>
+
+                            A project milestone has been completed successfully.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot completed"></div>
+
+                    <div>
+
+                        <h4>
+
+                            Project Delivered
+
+                        </h4>
+
+                        <p>
+
+                            One project has been marked as completed.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </ng-container>
+
+
+    <!-- ========================================= -->
+    <!-- Empty State -->
+    <!-- ========================================= -->
+
+    <ng-template #employeeEmpty>
+
+        <div class="empty-state">
+
+            <svg
+                viewBox="0 0 24 24"
+                fill="none">
+
+                <circle
+                    cx="12"
+                    cy="8"
+                    r="4"
+                    stroke="currentColor"
+                    stroke-width="2" />
+
+                <path
+                    d="M5 20C6.5 16 9 14 12 14C15 14 17.5 16 19 20"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round" />
+
+            </svg>
+
+            <h3>
+
+                No Employees Found
+
+            </h3>
+
+            <p>
+
+                Employees will appear here once they are added.
+
+            </p>
+
+        </div>
+
+    </ng-template>
+
+
+    <ng-template #projectEmpty>
+
+        <div class="empty-state">
+
+            <svg
+                viewBox="0 0 24 24"
+                fill="none">
+
+                <rect
+                    x="3"
+                    y="4"
+                    width="18"
+                    height="16"
+                    rx="3"
+                    stroke="currentColor"
+                    stroke-width="2" />
+
+                <path
+                    d="M8 8H16"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round" />
+
+                <path
+                    d="M8 12H13"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round" />
+
+            </svg>
+
+            <h3>
+
+                No Projects Available
+
+            </h3>
+
+            <p>
+
+                Active projects will appear here.
+
+            </p>
+
+        </div>
+
+    </ng-template>
+
+</div>
