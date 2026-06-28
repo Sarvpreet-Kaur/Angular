@@ -20,19 +20,17 @@
 
     <div class="chips">
 
-        <app-status-pill
-            [status]="project.status">
+        <app-status-pill [status]="project.status">
         </app-status-pill>
 
-        <app-priority-badge
-            [priority]="project.priority">
+        <app-priority-badge [priority]="project.priority">
         </app-priority-badge>
 
     </div>
 
     <div class="divider"></div>
 
-    <div class="manager"> 
+    <div class="manager">
 
         <span class="label">
 
@@ -66,14 +64,32 @@
 
     <div class="divider"></div>
 
+    <div class="actions">
+
     <button
-
         class="view-btn"
-
         (click)="view.emit(project)">
 
-        View Details
+        View
 
     </button>
+
+    <button
+        class="edit-btn"
+        (click)="edit.emit(project)">
+
+        Edit
+
+    </button>
+
+    <button
+        class="delete-btn"
+        (click)="delete.emit(project)">
+
+        Delete
+
+    </button>
+
+</div>
 
 </div>

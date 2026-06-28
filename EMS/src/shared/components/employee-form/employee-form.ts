@@ -40,6 +40,8 @@ export class EmployeeForm implements OnChanges {
   @Input()
   projects: Project[] = [];
 
+  @Input()
+  mode: 'add' | 'edit' | 'view' = 'add';
   // ----------------------------
   // Outputs
   // ----------------------------
@@ -49,6 +51,9 @@ export class EmployeeForm implements OnChanges {
 
   @Output()
   cancel = new EventEmitter<void>();
+
+  @Output()
+  edit = new EventEmitter<void>();
 
   // ----------------------------
   // Form
@@ -108,6 +113,13 @@ export class EmployeeForm implements OnChanges {
         this.resetForm();
       }
     }
+    if (changes['mode']) {
+      if (this.mode === 'view') {
+        this.employeeForm.disable();
+      } else {
+        this.employeeForm.enable();
+      }
+    }
   }
 
   // ----------------------------
@@ -115,14 +127,20 @@ export class EmployeeForm implements OnChanges {
   // ----------------------------
 
   get isEditMode(): boolean {
-    return !!this.employee;
+    return this.mode === 'edit';
   }
 
   get modalTitle(): string {
+    if (this.mode === 'view') {
+      return 'View Employee';
+    }
     return this.isEditMode ? 'Edit Employee' : 'Add Employee';
   }
 
   get submitButtonText(): string {
+    if (this.mode === 'view') {
+      return 'View Employee';
+    }
     return this.isEditMode ? 'Update Employee' : 'Add Employee';
   }
 

@@ -16,7 +16,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class Layout {
 
-  isSidebarOpen = true;
+  isSidebarOpen = false;
 
   constructor(
     private authService: AuthService,

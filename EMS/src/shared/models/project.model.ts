@@ -5,7 +5,7 @@ export interface Project {
     description: string;
     client: string;
     projectManager: string;
-    employeeIds: number[];
+    employeeIds: string[];
     priority: 'Low' | 'Medium' | 'High';
     status: 'Planning' | 'In Progress' | 'Completed' | 'On Hold';
     startDate: string;

@@ -6,7 +6,7 @@
                 Enterprise Employee Management
             </span>
             <h1>
-                Welcome Back 
+                Welcome Back
             </h1>
             <p>
                 Monitor your workforce, track ongoing projects and manage your
@@ -88,7 +88,7 @@
                 </div>
             </div> -->
 
-            <!-- <div class="action-grid">
+        <!-- <div class="action-grid">
                 <app-action-card title="Employees" description="View and manage all employees" actionText="Open"
                     (action)="goToEmployees()">
                 </app-action-card>
@@ -106,7 +106,7 @@
                 <!-- Active Projects -->
                 <!-- ================================ -->
 
-                <div class="dashboard-panel">
+                <!-- <div class="dashboard-panel">
 
                     <div class="section-header">
                         <div>
@@ -117,25 +117,24 @@
                                 Projects currently in progress
                             </p>
                         </div>
-                        <button
-                            class="text-btn"
-                            (click)="goToProjects()">
+                        <button class="text-btn" (click)="goToProjects()">
                             View All
                         </button>
                     </div>
-                    <div
-                        class="project-grid"
-                        *ngIf="activeProjects.length > 0; else projectEmpty">
-                        <app-project-card
-                            *ngFor="let project of activeProjects"
-                            [project]="project"
+                    <div class="project-grid" *ngIf="activeProjects.length > 0; else projectEmpty">
+                        <app-project-card *ngFor="let project of activeProjects" [project]="project"
                             [teamSize]="getTeamSize(project)">
 
                         </app-project-card>
 
+                        <app-project-form [isOpen]="isModalOpen" [project]="editingProject" [employees]="employees"
+                            [mode]="formMode" (cancel)="closeModal()">
+
+                        </app-project-form>
+
                     </div>
 
-                </div>
+                </div> -->
 
             </div>
 
@@ -252,21 +251,11 @@
 
         <div class="empty-state">
 
-            <svg
-                viewBox="0 0 24 24"
-                fill="none">
+            <svg viewBox="0 0 24 24" fill="none">
 
-                <circle
-                    cx="12"
-                    cy="8"
-                    r="4"
-                    stroke="currentColor"
-                    stroke-width="2" />
+                <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2" />
 
-                <path
-                    d="M5 20C6.5 16 9 14 12 14C15 14 17.5 16 19 20"
-                    stroke="currentColor"
-                    stroke-width="2"
+                <path d="M5 20C6.5 16 9 14 12 14C15 14 17.5 16 19 20" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" />
 
             </svg>
@@ -292,30 +281,13 @@
 
         <div class="empty-state">
 
-            <svg
-                viewBox="0 0 24 24"
-                fill="none">
+            <svg viewBox="0 0 24 24" fill="none">
 
-                <rect
-                    x="3"
-                    y="4"
-                    width="18"
-                    height="16"
-                    rx="3"
-                    stroke="currentColor"
-                    stroke-width="2" />
+                <rect x="3" y="4" width="18" height="16" rx="3" stroke="currentColor" stroke-width="2" />
 
-                <path
-                    d="M8 8H16"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round" />
+                <path d="M8 8H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
 
-                <path
-                    d="M8 12H13"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round" />
+                <path d="M8 12H13" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
 
             </svg>
 

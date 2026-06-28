@@ -335,11 +335,9 @@
     font-size: .82rem;
     letter-spacing: .4px;
 }
-.employee-actions {
-    display: flex;
-    gap: 12px;
-    margin-top: 22px;
-}
+
+
+
 .employee-actions {
 
     display: flex;
@@ -347,6 +345,7 @@
     gap: 12px;
 
     margin-top: 22px;
+    width: 100%
 
 }
 
@@ -370,27 +369,42 @@
 
 }
 
-.edit-btn {
+.view-btn {
+    flex: 0 0 50%;
 
-    color: #FFFFFF;
+    border: none;
+    border-radius: 12px;
+    padding: .9rem;
+    cursor: pointer;
+    color: white;
+    font-size: .92rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #6366f1, #3b82f6);
+    transition: all .25s ease;
+}
+.view-btn:hover {
 
-    background: linear-gradient(
-        135deg,
-        #7C5CFF,
-        #5B45D6
-    );
+    transform: translateY(-2px);
 
     box-shadow:
-        0 8px 20px rgba(124,92,255,.30);
-
+        0 10px 24px rgba(99, 102, 241, .30);
 }
+
+.edit-btn {
+    flex: 0 0 25%;
+
+    color: #FFFFFF;
+    background: linear-gradient(135deg, #7C5CFF, #5B45D6);
+    box-shadow: 0 8px 20px rgba(124, 92, 255, .30);
+}
+
 
 .edit-btn:hover {
 
     transform: translateY(-2px);
 
     box-shadow:
-        0 16px 32px rgba(124,92,255,.45);
+        0 16px 32px rgba(124, 92, 255, .45);
 
 }
 
@@ -401,29 +415,25 @@
 }
 
 .delete-btn {
+    flex: 0 0 25%;
 
     color: #FFB4B4;
-
-    border: 1px solid rgba(239,68,68,.35);
-
-    background: rgba(239,68,68,.12);
-
+    border: 1px solid rgba(239, 68, 68, .35);
+    background: rgba(239, 68, 68, .12);
 }
 
 .delete-btn:hover {
 
     color: white;
 
-    background: linear-gradient(
-        135deg,
-        #EF4444,
-        #B91C1C
-    );
+    background: linear-gradient(135deg,
+            #EF4444,
+            #B91C1C);
 
     border-color: transparent;
 
     box-shadow:
-        0 16px 32px rgba(239,68,68,.35);
+        0 16px 32px rgba(239, 68, 68, .35);
 
 }
 

@@ -1,1 +1,200 @@
-<p>project works!</p>
+<div class="projects-page">
+
+    <!-- Hero -->
+
+    <section class="hero">
+
+        <div>
+
+            <h1>
+
+                Project Management
+
+            </h1>
+
+            <p>
+
+                Manage projects, teams and delivery progress.
+
+            </p>
+
+        </div>
+
+        <button class="add-btn" (click)="openCreateModal()">
+
+            + New Project
+
+        </button>
+
+    </section>
+
+    <!-- KPI Cards -->
+
+    <section class="kpi-grid">
+
+        <div class="kpi-card">
+
+            <span>Total Projects</span>
+
+            <h2>
+
+                {{totalProjects}}
+
+            </h2>
+
+        </div>
+
+        <div class="kpi-card">
+
+            <span>In Progress</span>
+
+            <h2>
+
+                {{activeProjects}}
+
+            </h2>
+
+        </div>
+
+        <div class="kpi-card">
+
+            <span>Completed</span>
+
+            <h2>
+
+                {{completedProjects}}
+
+            </h2>
+
+        </div>
+
+        <div class="kpi-card">
+
+            <span>On Hold</span>
+
+            <h2>
+
+                {{onHoldProjects}}
+
+            </h2>
+
+        </div>
+
+    </section>
+
+    <!-- Toolbar -->
+
+    <section class="toolbar">
+
+        <input type="text" placeholder="Search projects..." [(ngModel)]="searchText" (input)="filterProjects()">
+
+        <select [(ngModel)]="selectedStatus" (change)="filterProjects()">
+
+            <option value="">
+
+                All Status
+
+            </option>
+
+            <option value="Planning">
+
+                Planning
+
+            </option>
+
+            <option value="In Progress">
+
+                In Progress
+
+            </option>
+
+            <option value="Completed">
+
+                Completed
+
+            </option>
+
+            <option value="On Hold">
+
+                On Hold
+
+            </option>
+
+        </select>
+
+        <select [(ngModel)]="selectedPriority" (change)="filterProjects()">
+
+            <option value="">
+
+                All Priority
+
+            </option>
+
+            <option value="Low">
+
+                Low
+
+            </option>
+
+            <option value="Medium">
+
+                Medium
+
+            </option>
+
+            <option value="High">
+
+                High
+
+            </option>
+
+        </select>
+
+    </section>
+
+    <!-- Loading -->
+
+    <div *ngIf="loading" class="loading-state">
+
+        Loading projects...
+
+    </div>
+
+    <!-- Empty -->
+
+    <div *ngIf="!loading && filteredProjects.length===0" class="empty-state">
+
+        <h3>
+
+            No projects found
+
+        </h3>
+
+        <p>
+
+            Try changing your filters or create a new project.
+
+        </p>
+
+    </div>
+
+    <!-- Grid -->
+
+    <section *ngIf="!loading && filteredProjects.length" class="projects-grid">
+
+        <app-project-card *ngFor="let project of filteredProjects" [project]="project"
+            [managerName]="project.projectManager" [teamSize]="project.teamSize"
+            (view)="viewProject($event)" (edit)="openEditModal($event)" (delete)="deleteProject($event)">
+
+        </app-project-card>
+
+    </section>
+
+    <!-- Modal -->
+
+    <app-project-form [isOpen]="isModalOpen" [project]="editingProject" [employees]="employees" [mode]="formMode"
+        (save)="saveProject($event)" (cancel)="closeModal()">
+
+    </app-project-form>
+
+</div>

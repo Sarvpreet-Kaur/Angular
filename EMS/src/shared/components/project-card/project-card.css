@@ -1,187 +1,348 @@
- :host {
+/* ===========================================
+   Card 
+=========================================== */
 
-     display: block;
+.project-card {
 
-     font-family: 'Inter', sans-serif;
+    position: relative;
 
- }
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 
- .project-card {
+    padding: 1.5rem;
 
-     position: relative;
+    background: #ffffff;
 
-     overflow: hidden;
+    border-radius: 22px;
 
-     padding: 28px;
+    border: 1px solid #edf2f7;
 
-     border-radius: 28px;
+    overflow: hidden;
 
-     background:
+    transition:
+        transform .28s ease,
+        box-shadow .28s ease,
+        border-color .28s ease;
 
-         linear-gradient(145deg,
+    box-shadow:
+        0 10px 30px rgba(15, 23, 42, .06);
+}
 
-             rgba(255, 255, 255, .78),
+.project-card:hover {
 
-             rgba(255, 255, 255, .55));
+    transform: translateY(-6px);
 
-     backdrop-filter: blur(22px);
+    border-color: rgba(99, 102, 241, .18);
 
-     border: 1px solid rgba(255, 255, 255, .65);
+    box-shadow:
+        0 18px 45px rgba(15, 23, 42, .12);
+}
 
-     box-shadow:
+/* ===========================================
+   Gradient Strip
+=========================================== */
 
-         0 15px 40px rgba(63, 44, 111, .08),
+.top-glow {
 
-         0 30px 60px rgba(141, 169, 245, .12);
+    position: absolute;
 
-     transition: .35s;
+    top: 0;
+    left: 0;
+    right: 0;
 
- }
+    height: 5px;
 
- .project-card:hover {
+    background:
+        linear-gradient(90deg,
+            #6366f1,
+            #3b82f6,
+            #06b6d4);
+}
 
-     transform: translateY(-8px);
+/* ===========================================
+   Header
+=========================================== */
 
-     box-shadow:
+.header {
 
-         0 25px 55px rgba(63, 44, 111, .14),
+    margin-top: .4rem;
+}
 
-         0 40px 80px rgba(141, 169, 245, .16);
+.header h2 {
 
- }
+    margin: 0;
 
- .top-glow {
+    color: #0f172a;
 
-     position: absolute;
+    font-size: 1.2rem;
 
-     right: -80px;
+    font-weight: 700;
 
-     top: -80px;
+    line-height: 1.35;
+}
 
-     width: 180px;
+.header p {
 
-     height: 180px;
+    margin-top: .65rem;
 
-     background:
+    color: #64748b;
 
-         radial-gradient(#BACDFA,
+    font-size: .92rem;
 
-             transparent);
+    line-height: 1.6;
 
-     opacity: .55;
+    display: -webkit-box;
+/* 
+    -webkit-line-clamp: 2; */
 
- }
+    -webkit-box-orient: vertical;
 
- .header h2 {
+    overflow: hidden;
 
-     margin: 0;
+    min-height: 46px;
+}
 
-     font-size: 1.4rem;
+/* ===========================================
+   Chips
+=========================================== */
 
-     color: #3F2C6F;
+.chips {
 
- }
+    display: flex;
 
- .header p {
+    flex-wrap: wrap;
 
-     margin: 10px 0 0;
+    gap: .6rem;
+}
 
-     color: #6C52B0;
+/* ===========================================
+   Divider
+=========================================== */
 
-     line-height: 1.5;
+.divider {
 
- }
+    height: 1px;
 
- .chips {
+    background: #edf2f7;
+}
 
-     display: flex;
+/* ===========================================
+   Manager & Team
+=========================================== */
 
-     gap: 14px;
+.manager,
+.team {
 
-     margin: 28px 0;
+    display: flex;
 
-     flex-wrap: wrap;
+    justify-content: space-between;
 
- }
+    align-items: center;
+}
 
- .divider {
+.label {
 
-     height: 1px;
+    color: #64748b;
 
-     background: rgba(108, 82, 176, .12);
+    font-size: .88rem;
 
-     margin: 22px 0;
+    font-weight: 500;
+}
 
- }
+.value {
 
- .manager,
+    color: #111827;
 
- .team {
+    font-size: .92rem;
 
-     display: flex;
+    font-weight: 600;
 
-     justify-content: space-between;
+    text-align: right;
+}
 
-     align-items: center;
+/* ===========================================
+   Button
+=========================================== */
 
-     margin-bottom: 16px;
+.view-btn {
 
- }
+    margin-top: auto;
 
- .label {
+    width: 100%;
 
-     font-size: .88rem;
+    border: none;
 
-     color: #6C52B0;
+    cursor: pointer;
 
- }
+    border-radius: 12px;
 
- .value {
+    padding: .9rem;
 
-     font-weight: 700;
+    color: white;
 
-     color: #3F2C6F;
+    font-weight: 600;
 
- }
+    font-size: .95rem;
 
- .view-btn {
+    background:
+        linear-gradient(135deg,
+            #6366f1,
+            #3b82f6);
 
-     margin-top: 26px;
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
 
-     width: 100%;
+.view-btn:hover {
 
-     padding: 15px;
+    transform: translateY(-2px);
 
-     border: none;
+    box-shadow:
+        0 10px 24px rgba(99, 102, 241, .30);
+}
 
-     border-radius: 18px;
+.view-btn:active {
 
-     background:
+    transform: scale(.98);
+}
 
-         linear-gradient(135deg,
+/* ===========================================
+   Responsive
+=========================================== */
 
-             #8DA9F5,
+@media (max-width:768px) {
 
-             #9D8AE0);
+    .project-card {
 
-     color: white;
+        padding: 1.25rem;
+    }
 
-     font-size: .95rem;
+    .header h2 {
 
-     font-weight: 600;
+        font-size: 1.08rem;
+    }
 
-     cursor: pointer;
+}
 
-     transition: .3s;
+/* ===========================================
+   Actions
+=========================================== */
 
- }
+.actions {
 
- .view-btn:hover {
+    display: flex;
 
-     transform: translateY(-3px);
+    gap: .75rem;
 
-     box-shadow:
+    margin-top: auto;
+}
 
-         0 12px 24px rgba(141, 169, 245, .35);
+/* View Button (50%) */
 
- }
+.view-btn {
+
+    flex: 2;
+
+    border: none;
+
+    border-radius: 12px;
+
+    padding: .9rem;
+
+    cursor: pointer;
+
+    color: white;
+
+    font-size: .92rem;
+
+    font-weight: 600;
+
+    background: linear-gradient(135deg,
+            #6366f1,
+            #3b82f6);
+
+    transition: all .25s ease;
+}
+
+.view-btn:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 24px rgba(99, 102, 241, .30);
+}
+
+/* Edit Button (25%) */
+
+.edit-btn {
+
+    flex: 1;
+
+    border: 1px solid #dbeafe;
+
+    border-radius: 12px;
+
+    padding: .9rem;
+
+    cursor: pointer;
+
+    color: #2563eb;
+
+    font-size: .9rem;
+
+    font-weight: 600;
+
+    background: #eff6ff;
+
+    transition: all .25s ease;
+}
+
+.edit-btn:hover {
+
+    background: #dbeafe;
+
+    border-color: #93c5fd;
+
+    transform: translateY(-2px);
+}
+
+/* Delete Button (25%) */
+
+.delete-btn {
+
+    flex: 1;
+
+    border: 1px solid #fecaca;
+
+    border-radius: 12px;
+
+    padding: .9rem;
+
+    cursor: pointer;
+
+    color: #dc2626;
+
+    font-size: .9rem;
+
+    font-weight: 600;
+
+    background: #fef2f2;
+
+    transition: all .25s ease;
+}
+
+.delete-btn:hover {
+
+    background: #fee2e2;
+
+    border-color: #fca5a5;
+
+    transform: translateY(-2px);
+}
+
+.actions button:active {
+
+    transform: scale(.97);
+}

@@ -76,9 +76,9 @@
 
                 </label>
 
-                <input type="text" formControlName="clientName" placeholder="Microsoft">
+                <input type="text" formControlName="client" placeholder="Microsoft">
 
-                <small *ngIf="isInvalid('clientName')">
+                <small *ngIf="isInvalid('client')">
 
                     Client name is required.
 
@@ -88,7 +88,7 @@
 
             <!-- Manager -->
 
-            <!-- <div class="form-group">
+            <div class="form-group">
 
                 <label>
 
@@ -96,13 +96,17 @@
 
                 </label>
 
-                <small *ngIf="isInvalid('managerId')">
+                <select formControlName="projectManager">
 
-                    Select a project manager.
+                    <option *ngFor="let employee of employees" [value]="employee.firstName + ' ' + employee.lastName">
 
-                </small>
+                        {{ employee.firstName }} {{ employee.lastName }}
 
-            </div> -->
+                    </option>
+
+                </select>
+
+            </div>
 
             <!-- Priority -->
 
@@ -178,25 +182,7 @@
 
             </div>
 
-            <!-- Progress -->
-
-            <div class="form-group">
-
-                <label>
-
-                    Progress (%)
-
-                </label>
-
-                <input type="number" min="0" max="100" formControlName="progress">
-
-                <small *ngIf="isInvalid('progress')">
-
-                    Progress must be between 0 and 100.
-
-                </small>
-
-            </div>
+            
 
             <!-- Start Date -->
 

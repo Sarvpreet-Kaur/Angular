@@ -8,7 +8,6 @@ import { EmployeeService } from '../../services/employee.service';
 import { Employee } from '../../../shared/models/employee.model';
 import { Project } from '../../../shared/models/project.model';
 
-import { ProjectCard } from '../../../shared/components/project-card/project-card';
 import { KpiCard } from '../../../shared/components/kpi-card/kpi-card';
 
 import { ChangeDetectorRef } from '@angular/core';
@@ -16,7 +15,7 @@ import { ChangeDetectorRef } from '@angular/core';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, ProjectCard, KpiCard],
+  imports: [CommonModule, KpiCard],
   templateUrl: './dashboard.html',
   styleUrls: ['./dashboard.css'],
 })
@@ -29,8 +28,11 @@ export class Dashboard implements OnInit {
   loading = false;
   employees: Employee[] = [];
   projects: Project[] = [];
-  recentEmployees: Employee[] = [];
   activeProjects: Project[] = [];
+  formMode: 'add' | 'edit' | 'view' = 'add';
+  isModalOpen = false;
+
+  editingProject: Project | null = null;
 
   // KPI
 
@@ -39,17 +41,12 @@ export class Dashboard implements OnInit {
   activeEmployees = 0;
   completedProjects = 0;
 
-  
   // Lifecycle
-  constructor(
-    private cdr: ChangeDetectorRef,
-  ) {
+  constructor(private cdr: ChangeDetectorRef) {
     console.log('Dashboard constructor');
-    
   }
 
   ngOnInit(): void {
-    
     console.log('Dashboard ngOnInit');
     this.loadDashboard();
   }
@@ -74,42 +71,39 @@ export class Dashboard implements OnInit {
   //     },
   //   });
   // }
-loadDashboard(): void {
-  
-  console.log('Dashboard loading...');
+  loadDashboard(): void {
+    console.log('Dashboard loading...');
 
-  forkJoin({
-    employees: this.employeeService.getEmployees(),
-    projects: this.projectService.getProjects(),
-  }).subscribe({
-    next: ({ employees, projects }) => {
-      
-      console.log('Employees received:', employees);
-      console.log('Projects received:', projects);
+    forkJoin({
+      employees: this.employeeService.getEmployees(),
+      projects: this.projectService.getProjects(),
+    }).subscribe({
+      next: ({ employees, projects }) => {
+        console.log('Employees received:', employees);
+        console.log('Projects received:', projects);
 
-      this.employees = employees;
-      this.projects = projects;
+        this.employees = employees;
+        this.projects = projects;
 
-      console.log('Calling calculateStatistics()');
-      
-      this.calculateStatistics();
+        console.log('Calling calculateStatistics()');
 
-      console.log('Finished calculateStatistics()');
-      
+        this.calculateStatistics();
 
-      this.loading = false;
-      console.log('_Loading = false');
-      // alert('Loading value after assignment = ' + this.loading);
-      this.cdr.detectChanges();
-    },
+        console.log('Finished calculateStatistics()');
 
-    error: (err) => {
-      console.error('Dashboard Error:', err);
-      alert('ERROR: ' + JSON.stringify(err));
-      this.loading = false;
-    },
-  });
-}
+        this.loading = false;
+        console.log('_Loading = false');
+        // alert('Loading value after assignment = ' + this.loading);
+        this.cdr.detectChanges();
+      },
+
+      error: (err) => {
+        console.error('Dashboard Error:', err);
+        alert('ERROR: ' + JSON.stringify(err));
+        this.loading = false;
+      },
+    });
+  }
   // Dashboard Stats
 
   calculateStatistics(): void {
@@ -160,4 +154,31 @@ loadDashboard(): void {
   goToProjects(): void {
     this.router.navigate(['/projects']);
   }
+
+  openCreateModal(): void {
+    this.editingProject = null;
+    this.formMode='add'
+    this.isModalOpen = true;
+  }
+
+  viewProject(project: Project): void {
+    this.editingProject=project;
+    this.isModalOpen=true
+    this.formMode='view'
+
+  }
+
+  openEditModal(project: Project): void {
+    this.editingProject = project;
+    this.isModalOpen = true;
+    this.formMode='edit'
+  }
+
+  closeModal(): void {
+    this.isModalOpen = false;
+    this.formMode='add'
+    this.editingProject = null;
+  }
+
+  
 }

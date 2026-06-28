@@ -3,6 +3,7 @@ import {
   EventEmitter,
   Input,
   Output,
+  OnInit,
   OnChanges,
   SimpleChanges,
   inject,
@@ -31,7 +32,7 @@ import { Employee } from '../../models/employee.model';
   templateUrl: './project-form.html',
   styleUrls: ['./project-form.css'],
 })
-export class ProjectForm implements OnChanges {
+export class ProjectForm implements OnInit, OnChanges {
   private readonly fb = inject(FormBuilder);
 
   // ============================
@@ -47,6 +48,8 @@ export class ProjectForm implements OnChanges {
   @Input()
   employees: Employee[] = [];
 
+  @Input()
+  mode: 'add' | 'edit' | 'view' = 'add';
 
   // ============================
   // Outputs
@@ -57,6 +60,22 @@ export class ProjectForm implements OnChanges {
 
   @Output()
   cancel = new EventEmitter<void>();
+
+  @Output()
+  edit = new EventEmitter<void>();
+
+  ngOnInit(): void {
+    this.projectForm.get('employeeIds')?.valueChanges.subscribe((ids) => {
+      this.projectForm.patchValue(
+        {
+          teamSize: ids?.length ?? 0,
+        },
+        {
+          emitEvent: false,
+        },
+      );
+    });
+  }
 
   // ============================
   // Managers
@@ -82,9 +101,9 @@ export class ProjectForm implements OnChanges {
 
       description: ['', [Validators.required, Validators.minLength(20)]],
 
-      clientName: ['', Validators.required],
+      client: ['', Validators.required],
 
-      managerId: [null, Validators.required],
+      projectManager: ['', Validators.required],
 
       employeeIds: [[]],
 
@@ -96,9 +115,8 @@ export class ProjectForm implements OnChanges {
 
       endDate: ['', Validators.required],
 
-      progress: [0, [Validators.required, Validators.min(0), Validators.max(100)]],
+      teamSize: [0],
     },
-
     {
       validators: this.dateRangeValidator,
     },
@@ -118,6 +136,8 @@ export class ProjectForm implements OnChanges {
 
           client: this.project.client,
 
+          projectManager: this.project.projectManager,
+
           employeeIds: this.project.employeeIds,
 
           priority: this.project.priority,
@@ -128,9 +148,17 @@ export class ProjectForm implements OnChanges {
 
           endDate: this.project.endDate,
 
+          teamSize: this.project.teamSize,
         });
       } else {
         this.resetForm();
+      }
+    }
+    if (changes['mode']) {
+      if (this.mode === 'view') {
+        this.projectForm.disable();
+      } else {
+        this.projectForm.enable();
       }
     }
   }
@@ -164,15 +192,21 @@ export class ProjectForm implements OnChanges {
   }
 
   get modalTitle(): string {
+    if (this.mode === 'view') {
+      return 'View Project';
+    }
     return this.isEditMode ? 'Edit Project' : 'Create Project';
   }
 
   get submitButtonText(): string {
+    if (this.mode === 'view') {
+      return 'View Project';
+    }
     return this.isEditMode ? 'Update Project' : 'Create Project';
   }
 
   get teamSize(): number {
-    return this.projectForm.value.employeeIds?.length ?? 0;
+    return this.projectForm.get('employeeIds')?.value?.length ?? 0;
   }
 
   // ============================
@@ -199,7 +233,7 @@ export class ProjectForm implements OnChanges {
     const value = this.projectForm.value;
 
     const payload: Project = {
-      id: this.project?.id ?? "",
+      id: this.project?.id ?? '',
 
       projectName: value.projectName.trim(),
 
@@ -207,7 +241,7 @@ export class ProjectForm implements OnChanges {
 
       client: value.client.trim(),
 
-      employeeIds: [...new Set((value.employeeIds ?? []) as number[])],
+      employeeIds: [...new Set((value.employeeIds ?? []) as string[])],
 
       priority: value.priority,
 
@@ -217,10 +251,9 @@ export class ProjectForm implements OnChanges {
 
       endDate: value.endDate,
 
-      teamSize: value.teamSize,
+      teamSize: this.teamSize,
 
-      projectManager: value.projectManager
-
+      projectManager: value.projectManager,
     };
 
     this.save.emit(payload);
@@ -246,9 +279,9 @@ export class ProjectForm implements OnChanges {
 
       description: '',
 
-      clientName: '',
+      client: '',
 
-      managerId: null,
+      projectManager: '',
 
       employeeIds: [],
 
@@ -260,7 +293,7 @@ export class ProjectForm implements OnChanges {
 
       endDate: '',
 
-      progress: 0,
+      teamSize: 0,
     });
   }
 }

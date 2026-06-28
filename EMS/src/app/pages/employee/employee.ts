@@ -32,6 +32,7 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   searchText = '';
 
   isFormOpen = false;
+  formMode: 'add' | 'edit' | 'view' = 'add';
 
   private destroy$ = new Subject<void>();
 
@@ -114,16 +115,25 @@ export class EmployeeComponent implements OnInit, OnDestroy {
   openAddForm(): void {
     this.selectedEmployee = null;
     this.isFormOpen = true;
+    this.formMode = 'add'
   }
 
   openEditForm(employee: Employee): void {
     this.selectedEmployee = employee;
     this.isFormOpen = true;
+    this.formMode = 'edit'
   }
 
   closeForm(): void {
     this.selectedEmployee = null;
     this.isFormOpen = false;
+    this.formMode = 'add'
+  }
+
+  viewForm(employee: Employee): void{
+    this.selectedEmployee = employee;
+    this.isFormOpen = true;
+    this.formMode = 'view'
   }
 
   saveEmployee(employee: Employee): void {
