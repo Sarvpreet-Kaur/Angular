@@ -27,9 +27,7 @@ import { Modal } from '../modal/modal';
 export class EmployeeForm implements OnChanges {
   private fb = inject(FormBuilder);
 
-  // ----------------------------
   // Inputs
-  // ----------------------------
 
   @Input()
   isOpen = false;
@@ -42,9 +40,7 @@ export class EmployeeForm implements OnChanges {
 
   @Input()
   mode: 'add' | 'edit' | 'view' = 'add';
-  // ----------------------------
   // Outputs
-  // ----------------------------
 
   @Output()
   save = new EventEmitter<Employee>();
@@ -55,9 +51,7 @@ export class EmployeeForm implements OnChanges {
   @Output()
   edit = new EventEmitter<void>();
 
-  // ----------------------------
   // Form
-  // ----------------------------
 
   employeeForm: FormGroup = this.fb.group({
     firstName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
@@ -75,9 +69,7 @@ export class EmployeeForm implements OnChanges {
     projectId: [[]],
   });
 
-  // ----------------------------
   // Lifecycle
-  // ----------------------------
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['employee']) {
@@ -122,9 +114,7 @@ export class EmployeeForm implements OnChanges {
     }
   }
 
-  // ----------------------------
   // Getters
-  // ----------------------------
 
   get isEditMode(): boolean {
     return this.mode === 'edit';
@@ -144,9 +134,7 @@ export class EmployeeForm implements OnChanges {
     return this.isEditMode ? 'Update Employee' : 'Add Employee';
   }
 
-  // ----------------------------
   // Save
-  // ----------------------------
 
   onSubmit(): void {
     if (this.employeeForm.invalid) {
@@ -191,9 +179,7 @@ export class EmployeeForm implements OnChanges {
     this.cancel.emit();
   }
 
-  // ----------------------------
   // Cancel
-  // ----------------------------
 
   onCancel(): void {
     this.resetForm();
@@ -201,9 +187,7 @@ export class EmployeeForm implements OnChanges {
     this.cancel.emit();
   }
 
-  // ----------------------------
   // Reset
-  // ----------------------------
 
   private resetForm(): void {
     this.employeeForm.reset({
@@ -235,9 +219,7 @@ export class EmployeeForm implements OnChanges {
     });
   }
 
-  // ----------------------------
   // Validation Helper
-  // ----------------------------
 
   isInvalid(controlName: string): boolean {
     const control = this.employeeForm.get(controlName);

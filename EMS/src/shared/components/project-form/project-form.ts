@@ -35,9 +35,7 @@ import { Employee } from '../../models/employee.model';
 export class ProjectForm implements OnInit, OnChanges {
   private readonly fb = inject(FormBuilder);
 
-  // ============================
   // Inputs
-  // ============================
 
   @Input()
   isOpen = false;
@@ -51,9 +49,7 @@ export class ProjectForm implements OnInit, OnChanges {
   @Input()
   mode: 'add' | 'edit' | 'view' = 'add';
 
-  // ============================
   // Outputs
-  // ============================
 
   @Output()
   save = new EventEmitter<Project>();
@@ -77,9 +73,7 @@ export class ProjectForm implements OnInit, OnChanges {
     });
   }
 
-  // ============================
   // Managers
-  // ============================
 
   // get managers(): Employee[] {
   //   const managerIds = new Set(
@@ -91,9 +85,7 @@ export class ProjectForm implements OnInit, OnChanges {
   //   );
   // }
 
-  // ============================
   // Form
-  // ============================
 
   projectForm: FormGroup = this.fb.group(
     {
@@ -122,9 +114,7 @@ export class ProjectForm implements OnInit, OnChanges {
     },
   );
 
-  // ============================
   // Lifecycle
-  // ============================
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['project']) {
@@ -163,9 +153,7 @@ export class ProjectForm implements OnInit, OnChanges {
     }
   }
 
-  // ============================
   // Custom Validator
-  // ============================
 
   dateRangeValidator(control: AbstractControl): ValidationErrors | null {
     const start = control.get('startDate')?.value;
@@ -183,9 +171,7 @@ export class ProjectForm implements OnInit, OnChanges {
         };
   }
 
-  // ============================
   // Helpers
-  // ============================
 
   get isEditMode(): boolean {
     return !!this.project;
@@ -209,9 +195,7 @@ export class ProjectForm implements OnInit, OnChanges {
     return this.projectForm.get('employeeIds')?.value?.length ?? 0;
   }
 
-  // ============================
   // Validation
-  // ============================
 
   isInvalid(controlName: string): boolean {
     const control = this.projectForm.get(controlName);
@@ -219,9 +203,7 @@ export class ProjectForm implements OnInit, OnChanges {
     return !!(control && control.invalid && (control.dirty || control.touched));
   }
 
-  // ============================
   // Save
-  // ============================
 
   onSubmit(): void {
     if (this.projectForm.invalid) {
@@ -259,9 +241,7 @@ export class ProjectForm implements OnInit, OnChanges {
     this.save.emit(payload);
   }
 
-  // ============================
   // Cancel
-  // ============================
 
   onCancel(): void {
     this.resetForm();
@@ -269,9 +249,7 @@ export class ProjectForm implements OnInit, OnChanges {
     this.cancel.emit();
   }
 
-  // ============================
   // Reset
-  // ============================
 
   private resetForm(): void {
     this.projectForm.reset({
